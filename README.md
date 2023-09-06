@@ -67,3 +67,7 @@ Visual Studio Code provides a built-in Run and Debug menu that makes it easy to 
 
 - Click on the "Run" button (it looks like a play button) at the top of the Run and Debug pane.
 - Alternatively, you can press `F5` to start the build and debugging process. 
+
+
+### Swagger command 
+dotnet add package Swashbuckle.AspNetCore
