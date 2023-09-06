@@ -15,9 +15,6 @@ app.UseSwaggerUI(c => {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
 });
 # endregion
-
-
-
 app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/books", () => {
