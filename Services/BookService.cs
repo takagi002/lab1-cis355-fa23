@@ -1,14 +1,44 @@
-public class BookService 
+public class BookService : IBookService
 {
-    public static List<Book> Books = new List<Book>
+    private readonly List<Book> _books;
+
+    public BookService()
     {
-        new Book { Id = 1, Title = "1", Author = "1" },
-        new Book { Id = 2, Title = "2", Author = "2" },
-        new Book { Id = 3, Title = "3", Author = "3" }
-    };
+        _books = new List<Book>
+        {
+            new Book { Id = 1, Title = "1984", Author = "George Orwell" },
+            new Book { Id = 2, Title = "To Kill a Mockingbird", Author = "Harper Lee" },
+            new Book { Id = 3, Title = "The Great Gatsby", Author = "F. Scott Fitzgerald" },
+        };
+    }
 
-    // Get list of books 
-    public IEnumerable<Book> GetAllBooks() => Books;
+    public IEnumerable<Book> GetAllBooks() => _books;
 
-    public void AddBook(Book book) => Books.Add(book);
+    public Book GetBookById(int id) => _books.FirstOrDefault(b => b.Id == id);
+
+    public void AddBook(Book book)
+    {
+        _books.Add(book);
+    }
+
+    public void UpdateBook(Book book)
+    {
+        var existingBook = GetBookById(book.Id);
+        if (existingBook == null)
+        {
+            return;
+        }
+        existingBook.Title = book.Title;
+        existingBook.Author = book.Author;
+    }
+
+    public void DeleteBook(int id)
+    {
+        var book = GetBookById(id);
+        if (book == null)
+        {
+            return;
+        }
+        _books.Remove(book);
+    }
 }
